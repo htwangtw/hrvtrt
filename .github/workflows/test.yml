@@ -1,9 +1,8 @@
 name: test and coverage
 
-on:
-  on: [push, pull_request]
-    paths-ignore:
-      - '**/README.md'
+on: [push, pull_request]
+  paths-ignore:
+    - '**/README.md'
 
 jobs:
   build:
