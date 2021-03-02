@@ -1,4 +1,3 @@
-
 # PROJECT_DIR = Path(__file__).parent
 # DATADIR = PROJECT_DIR / "data/rawdata/phenotype"
 # SUBJLIST_PATH = PROJECT_DIR / "data/derivatives/behtrt/ses-TRT_subjectinfo.tsv"
