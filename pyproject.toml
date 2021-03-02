@@ -2,9 +2,23 @@
 line-length = 79
 target-version = ['py38']
 include = '\.pyi?$'
-extend-exclude = '''
-# A regex preceded with ^/ will apply only to files and directories
-# in the root of the project.
-^/*
-docs/*
+exclude = '''
+^/(
+  (
+      \.eggs
+    | \.git*
+    | \.datalad
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+    | docs
+  )/
+  | setup.py           # also separately exclude a file named foo.py in
+                     # the root of the project
+)
 '''
