@@ -1,0 +1,4 @@
+[submodule "data/rawdata"]
+	path = data/rawdata
+	url = ./data/rawdata
+	datalad-id = e9cad9f4-e01c-4d98-a5da-f2ec6ebc59e8
