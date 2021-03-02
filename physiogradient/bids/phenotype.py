@@ -72,7 +72,10 @@ class Phenotype:
             data = self._load_single(assessment, var)
             if data is not None:
                 collect_data.append(data)
-        return pd.concat(collect_data, axis=1)
+        if collect_data:
+            return pd.concat(collect_data, axis=1)
+        else:
+            return None
 
     def _load_single(self, assessment, var=None):
         """
