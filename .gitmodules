@@ -2,7 +2,7 @@
 	path = data/rawdata
 	url = ./data/rawdata
 	datalad-id = e9cad9f4-e01c-4d98-a5da-f2ec6ebc59e8
-	datalad-url = ssh://bsms9gxx@apollo2.hpc.sussex.ac.uk/research/cisc2/projects/critchley_nkiphysio/enhanced-nki-dataset/
+	datalad-url = ssh://bsms9gxx@apollo2.hpc.sussex.ac.uk/research/cisc2/projects/critchley_nkiphysio/enhanced-nki-dataset/data/phenotype/
 [submodule "data/derivatives/behtrt"]
 	path = data/derivatives/behtrt
 	url = ./data/derivatives/behtrt
