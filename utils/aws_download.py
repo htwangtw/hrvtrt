@@ -13,7 +13,7 @@ LOCAL='/research/cisc1/projects/critchley_nkiphysio/rawdata'
 FILEPATH = os.path.dirname(os.path.abspath(__file__))
 
 def get_subjects():
-    pwd = Path(FILEPATH).parent
+    pwd = Path(FILEPATH)
     df = pd.read_csv(pwd / "nki_trt.tsv", sep="\t")
     subjects = df.participant_id.unique().tolist()
     sub_ses = []
