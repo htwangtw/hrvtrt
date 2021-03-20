@@ -52,6 +52,11 @@ def filter_files(files):
             local.append(lp)
     return list(zip(keep, local))
 
+def creatdir(l):
+    target = Path(l).parent
+    if not target.is_dir():
+        os.makedirs(target)
+
 def main():
     s3 = boto3.client('s3', config=Config(signature_version=UNSIGNED))
     sub_ses = get_subjects()
@@ -63,6 +68,7 @@ def main():
 
     for files in download_these.values():
         for s, l in files:
+            creatdir(l)
             s3.download_file(S3BUCKET, s, l)
 
 
