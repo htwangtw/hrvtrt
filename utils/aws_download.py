@@ -56,12 +56,13 @@ def creatdir(l):
     target = Path(l).parent
     if not target.is_dir():
         os.makedirs(target)
+        print(target)
 
 def main():
     s3 = boto3.client('s3', config=Config(signature_version=UNSIGNED))
     sub_ses = get_subjects()
     download_these = {}
-    for sub, ses in sub_ses[:4]:
+    for sub, ses in sub_ses:
         files = subject_crawler(sub, ses)
         keep = filter_files(files)
         download_these = keep_file(sub, download_these, keep)
