@@ -10,10 +10,11 @@ import boto3
 from botocore import UNSIGNED
 from botocore.client import Config
 
-S3BUCKET='fcp-indi'
-PREFIX='data/Projects/RocklandSample/RawDataBIDSLatest'
-LOCAL='/research/cisc1/projects/critchley_nkiphysio/rawdata'
+S3BUCKET = "fcp-indi"
+PREFIX = "data/Projects/RocklandSample/RawDataBIDSLatest"
+LOCAL = "/research/cisc1/projects/critchley_nkiphysio/rawdata"
 FILEPATH = os.path.dirname(os.path.abspath(__file__))
+
 
 def get_subjects():
     pwd = Path(FILEPATH)
@@ -26,12 +27,12 @@ def get_subjects():
             sub_ses.append((s, ses))
     return sub_ses
 
+
 def subject_crawler(subject, session):
-    s3_client = boto3.client('s3',
-                             config=Config(signature_version=UNSIGNED))
+    s3_client = boto3.client("s3", config=Config(signature_version=UNSIGNED))
     bidsfiles = s3_client.list_objects_v2(
-        Bucket=S3BUCKET,
-        Prefix=f"{PREFIX}/sub-{subject}/ses-{session}/")
+        Bucket=S3BUCKET, Prefix=f"{PREFIX}/sub-{subject}/ses-{session}/"
+    )
     return [d["Key"] for d in bidsfiles["Contents"]]
 
 
@@ -45,6 +46,7 @@ def keep_file(sub, dt, keep):
             download_these.pop(sub)
     return download_these
 
+
 def filter_files(files):
     keep = []
     local = []
@@ -55,14 +57,16 @@ def filter_files(files):
             local.append(lp)
     return list(zip(keep, local))
 
+
 def creatdir(l):
     target = Path(l).parent
     if not target.is_dir():
         os.makedirs(target)
         print(target)
 
+
 def main():
-    s3 = boto3.client('s3', config=Config(signature_version=UNSIGNED))
+    s3 = boto3.client("s3", config=Config(signature_version=UNSIGNED))
     sub_ses = get_subjects()
     download_these = {}
     for sub, ses in sub_ses:
