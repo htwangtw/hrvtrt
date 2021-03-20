@@ -1,3 +1,7 @@
+# python qsub wrapper for this project
+# always execute this script at the root of the repo
+# as all files referenced are from here
+#
 #!/bin/bash
 #$ -N pythonjob
 #$ -o /home/$USER/logs

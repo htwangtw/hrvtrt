@@ -1,3 +1,6 @@
+"""
+NKI TRT dataset resting state date (TR=645 ms) download script
+"""
 from pathlib import Path
 import os
 
@@ -66,7 +69,8 @@ def main():
         files = subject_crawler(sub, ses)
         keep = filter_files(files)
         download_these = keep_file(sub, download_these, keep)
-
+    print("gathered all the relevant files")
+    print(len(download_these))
     for files in download_these.values():
         for s, l in files:
             creatdir(l)
