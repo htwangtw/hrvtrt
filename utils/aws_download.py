@@ -1,6 +1,5 @@
 from pathlib import Path
-import re
-import csv
+import os
 
 import pandas as pd
 
@@ -11,9 +10,11 @@ from botocore.client import Config
 S3BUCKET='fcp-indi'
 PREFIX='data/Projects/RocklandSample/RawDataBIDSLatest'
 LOCAL='/research/cisc1/projects/critchley_nkiphysio/rawdata'
+FILEPATH = os.path.dirname(os.path.abspath(__file__))
 
 def get_subjects():
-    df = pd.read_csv("utils/nki_trt.tsv", sep="\t")
+    pwd = Path(FILEPATH).parent
+    df = pd.read_csv(pwd / "nki_trt.tsv", sep="\t")
     subjects = df.participant_id.unique().tolist()
     sub_ses = []
     for s in subjects:
