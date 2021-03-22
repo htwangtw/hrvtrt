@@ -26,5 +26,7 @@ for path in DATADIR.glob("*.tsv"):
     task_name = path.name.split(".")[0]
     var = []
     df = phenotype.parse({task_name: var})
-    if df is not None and df.shape[0] > 40:
+    if df is not None and df.shape[0] > 113:
+        # keep assessment with 60% data present
         keep.append(task_name)
+print(len(keep))
