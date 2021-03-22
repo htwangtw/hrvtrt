@@ -5,13 +5,13 @@
 #$ -e logs
 #$ -l m_mem_free=4G
 #$ -l 'h=!node001&!node069&!node072&!node076&!node077'
-#$ -t 1-191
+#$ -t 1-189
 #$ -tc 50
 
-# 191 participants
-DATA_DIR=/research/cisc1/projects/critchley_nkiphysio/rawdata
-SCRATCH_DIR=/research/cisc1/projects/critchley_nkiphysio/wd
-OUT_DIR=/research/cisc2/projects/critchley_nkiphysio/derivatives
+# 189 participants
+DATA_DIR=${HOME}1/projects/critchley_nkiphysio/scratch/rawdata
+SCRATCH_DIR=${HOME}/projects/critchley_nkiphysio/scratch/wd
+OUT_DIR=${HOME}/projects/critchley_nkiphysio/derivatives
 
 cd ${DATA_DIR}
 SUBJLIST=($(ls sub* -d))
