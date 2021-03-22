@@ -15,7 +15,7 @@ test_subs = Path(__file__).parent / "data/participants.tsv"
 def test_get_subjects():
     sub_ses = get_subjects(test_subs)
     assert len(sub_ses[0]) == 2
-    assert sub_ses[0][1] == "TRT"
+    assert len(sub_ses[0][1]) >= 3  # session must be three - 4 char string
 
 
 def test_subject_crawler():

@@ -1,9 +1,8 @@
-[submodule "data/rawdata"]
-	path = data/rawdata
-	url = ./data/rawdata
-	datalad-id = e9cad9f4-e01c-4d98-a5da-f2ec6ebc59e8
-	datalad-url = ssh://bsms9gxx@apollo2.hpc.sussex.ac.uk/research/cisc2/projects/critchley_nkiphysio/enhanced-nki-dataset/data/phenotype/
 [submodule "data/derivatives/behtrt"]
 	path = data/derivatives/behtrt
 	url = ./data/derivatives/behtrt
 	datalad-id = 50deb78c-0f79-425e-9b42-aee7faf82d69
+[submodule "data/rawdata"]
+	path = data/rawdata
+	url = ./data/rawdata
+	datalad-id = 40a0e4ac-5adf-454d-84ea-b6208149f343
