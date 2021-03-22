@@ -1,6 +1,6 @@
 import pytest
 from pathlib import Path
-from ..download_trt import (
+from ..download import (
     get_subjects,
     subject_crawler,
     keep_file,
