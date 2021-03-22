@@ -13,6 +13,7 @@ from botocore.client import Config
 
 def get_subjects(datapath):
     df = pd.read_csv(datapath, sep="\t")
+<<<<<<< HEAD
     subjects = df.participant_id.tolist()
     baseline = df.baseline.tolist()
     retest = df.retest.tolist()
@@ -20,6 +21,14 @@ def get_subjects(datapath):
     for sub, bas, trt in zip(subjects, baseline, retest):
         sub_ses.append((sub, bas))
         sub_ses.append((sub, trt))
+=======
+    subjects = df.participant_id.unique().tolist()
+    sub_ses = []
+    for s in subjects:
+        list_ses = df.query(f"participant_id=='{s}'").ses.unique().tolist()
+        for ses in list_ses:
+            sub_ses.append((s, ses))
+>>>>>>> main
     return sub_ses
 
 
