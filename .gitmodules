@@ -2,3 +2,7 @@
 	path = data/derivatives/behtrt
 	url = ./data/derivatives/behtrt
 	datalad-id = 50deb78c-0f79-425e-9b42-aee7faf82d69
+[submodule "data/rawdata"]
+	path = data/rawdata
+	url = ./data/rawdata
+	datalad-id = 40a0e4ac-5adf-454d-84ea-b6208149f343
