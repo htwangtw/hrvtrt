@@ -9,7 +9,7 @@
 #$ -tc 50
 
 # 189 participants
-DATA_DIR=${HOME}1/projects/critchley_nkiphysio/scratch/rawdata
+DATA_DIR=${HOME}/projects/critchley_nkiphysio/scratch/rawdata
 SCRATCH_DIR=${HOME}/projects/critchley_nkiphysio/scratch/wd
 OUT_DIR=${HOME}/projects/critchley_nkiphysio/derivatives
 
