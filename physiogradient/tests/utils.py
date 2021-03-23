@@ -10,6 +10,12 @@ def get_test_data_path():
 
 
 def downsample_test_data(prefix):
+    """Downsampling fmriprep output to create testdata.
+    Resolution reduced to 33% of the original.
+    Only the first 30 volumes are kept.
+    The function is here for book keeping as the real data is not included in the repository.
+    The downsampling procedure is modified from on MAIN nilearn tutorial data https://osf.io/wjtyq/
+    """
     data = (
         get_test_data_path()
         / "fmriprep"
