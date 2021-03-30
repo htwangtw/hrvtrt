@@ -31,7 +31,8 @@ singularity run --cleanenv \
     --participant-label ${SUBJECT} \
     --omp-nthreads 4 --nthreads 6 --mem_mb 30000 \
     --longitudinal \
-    --output-spaces MNI152NLin2009cAsym:res-2 \
+    --output-spaces MNI152NLin2009cAsym:res-2 fsLR:den-32k \
+    --cifti-output \
     --fs-license-file ${HOME}/singularity-images/freesurfer_license.txt \
     --work-dir /wd \
     /data /out/ participant
