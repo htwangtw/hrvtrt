@@ -12,6 +12,7 @@ numpy = "~1.16"
 nibabel = "^3.2.1"
 nilearn = "^0.7.0"
 boto3 = "^1.17.33"
+neurokit2 = "^0.1.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2"
