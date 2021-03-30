@@ -204,6 +204,7 @@ Due to the exploratory nature, the authors will simply accept the null-results a
 If the functional connectivity-physiology interaction term was found stable, we intend to do two exploratory analysis using the two connectome derived features.
 1. Network based edges association with individual difference in phenotype data
 2. connectivity-physiology interaction gradient score and phenotype data
+
 Due to the high volume of available assessments, we will use canonical correlation analysis based methods for data exploration.
 
 <!-- Reference -->
