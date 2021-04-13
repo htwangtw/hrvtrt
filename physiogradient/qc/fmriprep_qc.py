@@ -17,6 +17,7 @@ import glob
 import os
 import re
 
+
 def build_app(derivatives_path):
 
     static_image_route = "/images/"
@@ -63,9 +64,8 @@ def build_app(derivatives_path):
         )
 
         preproc_steps_names = [
-                re.match(".*?desc-(.*?)_bold.svg", svg)[1]
-                for svg in svgs
-            ]
+            re.match(".*?desc-(.*?)_bold.svg", svg)[1] for svg in svgs
+        ]
 
         return preproc_steps_names
 
@@ -76,16 +76,17 @@ def build_app(derivatives_path):
         ]
     )
     default_sessions = [
-        {"label": session, "value": path} for session, path in zip(*list_sessions(subjects[0]))
+        {"label": session, "value": path}
+        for session, path in zip(*list_sessions(subjects[0]))
     ]
 
-
-    preproc_steps_found = check_preproc_steps(subjects[0], default_sessions[0]["label"])
+    preproc_steps_found = check_preproc_steps(
+        subjects[0], default_sessions[0]["label"]
+    )
     preproc_steps = [
         (preproc_steps_template[preproc_step_found], preproc_step_found)
         for preproc_step_found in preproc_steps_found
         if preproc_step_found in list(preproc_steps_template.keys())
-
     ]
 
     app = dash.Dash()
@@ -93,9 +94,9 @@ def build_app(derivatives_path):
     app.layout = html.Div(
         [
             Keyboard(id="keyboard"),
-            dcc.Store(id='fname-idx', data=0),
-            dcc.Store(id='left_press', data=False),
-            dcc.Store(id='right_press', data=False),
+            dcc.Store(id="fname-idx", data=0),
+            dcc.Store(id="left_press", data=False),
+            dcc.Store(id="right_press", data=False),
             dcc.Dropdown(
                 id="subject-dropdown",
                 options=[
@@ -105,7 +106,9 @@ def build_app(derivatives_path):
                 value=subjects[0],
             ),
             dcc.Dropdown(
-                id="session-dropdown", options=default_sessions, value=default_sessions[0]["value"]
+                id="session-dropdown",
+                options=default_sessions,
+                value=default_sessions[0]["value"],
             ),
             dcc.Tabs(
                 id="step-tabs",
@@ -115,7 +118,7 @@ def build_app(derivatives_path):
                 ],
                 value=preproc_steps[0][1],
             ),
-            html.ObjectEl(id="image", style={'width': "100%"}),
+            html.ObjectEl(id="image", style={"width": "100%"}),
         ]
     )
 
@@ -124,33 +127,36 @@ def build_app(derivatives_path):
         [dash.dependencies.Input("subject-dropdown", "value")],
     )
     def update_sessions_list(subject):
-        return [{"label": session, "value": path} for session, path in zip(*list_sessions(subject))]
+        return [
+            {"label": session, "value": path}
+            for session, path in zip(*list_sessions(subject))
+        ]
 
     @app.callback(
-        dash.dependencies.Output('left_press', 'data'),
+        dash.dependencies.Output("left_press", "data"),
         [
             dash.dependencies.Input("keyboard", "keydown"),
             dash.dependencies.Input("keyboard", "n_keydowns"),
         ],
-        dash.dependencies.State('left_press', 'data'),
+        dash.dependencies.State("left_press", "data"),
     )
     def update_left(key_status, n_press, data):
         if key_status:
-            if (key_status["key"] == "ArrowLeft"):
+            if key_status["key"] == "ArrowLeft":
                 return True
         return False
 
     @app.callback(
-        dash.dependencies.Output('right_press', 'data'),
+        dash.dependencies.Output("right_press", "data"),
         [
             dash.dependencies.Input("keyboard", "keydown"),
             dash.dependencies.Input("keyboard", "n_keydowns"),
         ],
-        dash.dependencies.State('right_press', 'data'),
+        dash.dependencies.State("right_press", "data"),
     )
     def update_right(key_status, n_press, data):
         if key_status:
-            if (key_status["key"] == "ArrowRight"):
+            if key_status["key"] == "ArrowRight":
                 return True
         return False
 
@@ -163,11 +169,13 @@ def build_app(derivatives_path):
         ],
         [
             dash.dependencies.State("fname-idx", "data"),
-            dash.dependencies.State('left_press', 'data'),
-            dash.dependencies.State('right_press', 'data'),
-        ]
+            dash.dependencies.State("left_press", "data"),
+            dash.dependencies.State("right_press", "data"),
+        ],
     )
-    def update_fname_idx(fname, fnames, n_press, fname_idx, left_press, right_press):
+    def update_fname_idx(
+        fname, fnames, n_press, fname_idx, left_press, right_press
+    ):
         for ii, curr_fname in enumerate(fnames):
             if curr_fname["value"] == fname:
                 fname_idx = ii
@@ -189,11 +197,13 @@ def build_app(derivatives_path):
         ],
         [
             dash.dependencies.State("fname-idx", "data"),
-            dash.dependencies.State('left_press', 'data'),
-            dash.dependencies.State('right_press', 'data'),
-        ]
+            dash.dependencies.State("left_press", "data"),
+            dash.dependencies.State("right_press", "data"),
+        ],
     )
-    def update_session_value(subject, fnames, n_press, fname_idx, left_press, right_press):
+    def update_session_value(
+        subject, fnames, n_press, fname_idx, left_press, right_press
+    ):
         if left_press | right_press:
             return list_sessions(subject)[1][fname_idx]
         return list_sessions(subject)[1][0]
@@ -209,8 +219,12 @@ def build_app(derivatives_path):
     def update_image_src(subject, fname, step):
         if fname:
             return os.path.join(
-                    static_image_route, subject, fname.replace(f"-{default_preproc_step}_", "-{}_".format(step))
-                )
+                static_image_route,
+                subject,
+                fname.replace(
+                    f"-{default_preproc_step}_", "-{}_".format(step)
+                ),
+            )
 
     @app.server.route("/images/<subject>/<image_path>")
     def serve_image(subject, image_path):
@@ -230,11 +244,15 @@ def parse_args():
         description="run dash app to view fmriprep qc images",
     )
     parser.add_argument("derivatives_path", help="fmriprep derivative folder")
-    parser.add_argument("--port", action="store", default=8050, help="server port")
+    parser.add_argument(
+        "--port", action="store", default=8050, help="server port"
+    )
     return parser.parse_args()
 
 
 if __name__ == "__main__":
     args = parse_args()
     app = build_app(args.derivatives_path)
-    app.run_server(debug=True, dev_tools_silence_routes_logging=False, port=args.port)
+    app.run_server(
+        debug=True, dev_tools_silence_routes_logging=False, port=args.port
+    )

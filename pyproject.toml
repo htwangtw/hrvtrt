@@ -8,11 +8,12 @@ license = "Apache2.0"
 [tool.poetry.dependencies]
 python = "^3.8"
 pandas = "~1.2"
-numpy = "~1.16"
+numpy = "^1.20.2"
 nibabel = "^3.2.1"
 nilearn = "^0.7.0"
 boto3 = "^1.17.33"
 neurokit2 = "^0.1.1"
+load-confounds = "^0.11.1"
 dash = "^1.20.0"
 dash-extensions = "^0.0.51"
 
