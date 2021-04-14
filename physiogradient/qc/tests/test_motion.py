@@ -6,5 +6,3 @@ confounds = (
     Path(get_test_data_path())
     / "sub-test_ses-BAS_task-rest_desc-confounds_timeseries.tsv"
 )
-
-
