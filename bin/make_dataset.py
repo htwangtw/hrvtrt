@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from physiogradient.bids import Phenotype
+from hrvtrt.bids import Phenotype
 
 
 PROJECT_DIR = Path(__file__).parents[1]
