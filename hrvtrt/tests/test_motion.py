@@ -1,5 +1,5 @@
-from ..motion import *
-from ...tests.utils import get_test_data_path
+from ..qc.motion import *
+from .utils import get_test_data_path
 from pathlib import Path
 
 confounds = (

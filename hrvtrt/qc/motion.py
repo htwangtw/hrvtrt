@@ -58,7 +58,7 @@ def fmri_qc(fmriprep_path):
 
 
 def _find_cifti(confound_path):
-    """get cifti file path from the relevant confound path"""
+    """get cifti file path from the relevant confound path."""
     cii_path = list(confound_path.parent.glob("*_den-91k_bold.dtseries.nii"))
     if cii_path and len(cii_path) == 1:
         return cii_path[0]
@@ -68,7 +68,7 @@ def _find_cifti(confound_path):
 
 def _tsnr(imgdata, t_axis):
     """
-    Calculate average of temporal signal to noise ratio
+    Calculate average of temporal signal to noise ratio.
     """
     meanimg = np.mean(imgdata, axis=t_axis)
     stddevimg = np.std(imgdata, axis=t_axis)
@@ -82,9 +82,10 @@ def _tsnr(imgdata, t_axis):
 
 def _fd(fd, thresh=0.2):
     """
-    Calculate mean and maximum framewise displacement
+    Calculate mean and maximum framewise displacement.
     """
-    assert len(fd.shape) == 1
+    if len(fd.shape) != 1:
+        raise ValueError("Framewise displacement should has a size of 1 x N")
     fd_mean = np.mean(fd)
     fd_max = np.max(fd)
     fd_perc = sum(fd > thresh) / fd.shape[0]
