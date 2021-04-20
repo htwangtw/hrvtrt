@@ -11,7 +11,7 @@ from ..utils import read_tsv, parse_bids_subject
 
 def fmri_qc(fmriprep_path):
     """
-    Summarise motion related QC informations
+    Summarise motion related QC information.
 
     Parameters
     ----------
@@ -21,7 +21,7 @@ def fmri_qc(fmriprep_path):
     Retrun
     ------
     pd.Dataframe
-        Individual level fMRI motion QC matrics, including
+        Individual level fMRI motion QC metrics, including
         Framewise displacement derivatives (mean, maximum, percent above 0.2 mm)
         Mean t-SNR of all  grayordinates
     """
@@ -59,7 +59,7 @@ def fmri_qc(fmriprep_path):
 
 def _find_cifti(confound_path):
     """get cifti file path from the relevant confound path."""
-    cii_path = list(confound_path.parent.glob("*_den-91k_bold.dtseries.nii"))
+    cii_path = list(confound_path.parent.glob("*_bold.dtseries.nii"))
     if cii_path and len(cii_path) == 1:
         return cii_path[0]
     else:
