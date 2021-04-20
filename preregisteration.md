@@ -20,7 +20,7 @@ When specifying your research questions, it is good practice to use only two new
 There's a long-standing debate of the impact of physiology signals on fMRI data.
 In the denoising literature, various methods have been developed to remove physiology based noise ([Glover et al. 2000]).
 Although BOLD signal is, theoretically, heavily confounded by physiology signals, researchers still found functional relevance of physiology signal after removing relevant confounds.
-Literature in dynamic resting state fMRI analysis has shown that heart rate variability is highly relevant to the default mode network after accounting for heart beat and respiration related noise ([Chang et al. 2009]).
+Literature in dynamic resting state fMRI analysis has shown that heart rate variability is highly relevant to the default mode network after accounting for heart beat and respiration related noise ([Chang et al., 2009]).
 Activity in bilateral insula correlated with the interaction of high-frequency continuous heart rate variability and emotion-arousing audio inputs in movie watching paradigm ([Nguyen et al., 2015]) as well as resting state ([Kassinopoulos et al., 2019]).
 A study simulating BOLD from physiology data has recovered networks similar to canonical resting state networks found through clustering functional connectivity data ([Chen et al., 2020]).
 From the converging evidence above, we designed this analysis to understand the relevance of heart rate variability in resting state functional connectome and explore the individual differences of its cognitive and psychiatric relevance.
@@ -32,7 +32,7 @@ From the converging evidence above, we designed this analysis to understand the 
 <!-- For each of the research questions listed in the previous section, provide one or more specific and testable hypothesis. Please make clear whether the hypotheses are directional (e.g., A > B) or non-directional (e.g., A ≠ B). If directional, state the direction. You may also provide a rationale for each hypothesis. -->
 This experiment is exploratory so we do not have a prediction as to the outcome of our analyses.
 To test RQ1, we will determine whether fMRI resting state functional connectivity, using the data from session 1, is significantly correlated with heart-rate variability.
-We will expand the analysis in ([Chang et al. 2009]) from single ROI (dACC and amygdala) to the full connectome.
+We will expand the analysis in ([Chang et al., 2009]) from single ROI (dACC and amygdala) to the full connectome.
 We will also explore novel connectivity-based gradients to understand the impact of heart rate variability on the whole brain.
 
 To test RQ2, we will compare any significant associations found in our tests above with the associations for the session 2 data.
@@ -68,13 +68,13 @@ The phenotype data is restricted to applicants that completes a [data usage agre
 
 ### Data Identifiers
 <!-- Please provide a URL, DOI, or other persistent, unique identifier of the dataset. -->
-Publication: https://doi.org/10.3389/fnins.2012.00152
-Official website: http://fcon_1000.projects.nitrc.org/indi/enhanced/index.html
+- Publication: https://doi.org/10.3389/fnins.2012.00152
+- Official website: http://fcon_1000.projects.nitrc.org/indi/enhanced/index.html
 
 ### Access Date
 <!-- Specify the download or data access date. If the data were accessed multiple times by different team members, specify the download date for that data that will be used in the statistical analysis. -->
-Physiology and fMRI data: 2021-03-20
-Phenotype data: 2021-03-20
+- Physiology and fMRI data: 2021-03-20
+- Phenotype data: 2021-03-20
 
 ### Data Collection Procedures
 <!-- If the data collection procedure is well documented, provide a link to that information. If the data collection procedure is not well documented, describe, to the best of your ability, how data were collected. Describe the representativeness of the sample and any possible biases stemming from the data collection. -->
@@ -148,7 +148,7 @@ The analysis will be performed on surface grayordinate output to focus on grey m
 
 The preprocessing procedure will be developed using simulated test data before applying it to real dataset.
 The project will use `neurokit2` for its support in both respiratory volume data and pulse oximetry data.
-The respiratory volume data will be processed with method developed by [Khodadad1 et al.2018].
+The respiratory volume data will be processed with method developed by [Khodadad1 et al., 2018].
 For pulse oximetry data, we preprocess the signal with peak detection methods reported in [Elgendi et al., 2013].
 
 #### Exclusion criteria
@@ -168,7 +168,7 @@ Phenotype outliers will be defined as data points with a z-score above 3.
 Outliers will be imputed with the same strategy as missing data.
 
 #### Post-fMRIprep data denoising parameters
-We employ the denoising strategy detailed in ([Chen et al., 2020]) 2.2.2. with `RETROICOR` ([Glover et al. 2000]) calculated from physiology recording, scanner temporal drifts, and six motion parameters on minimally processed HCP data.
+We employ the denoising strategy detailed in ([Chen et al., 2020]) 2.2.2. with `RETROICOR` ([Glover et al., 2000]) calculated from physiology recording, scanner temporal drifts, and six motion parameters on minimally processed HCP data.
 Corresponding to `fMRIprep`, the motion-related and scanner temporal drifts can be addressed with high-pass filtering and motion parameters generated by fMRIprep.
 This is implemented with python library `load_confound method` `Para6`.
 `RETROICOR` parameters will include measure up to the 2nd order as the implementation in [Chen et al., 2020].
@@ -181,8 +181,9 @@ Point processes can be used as models for random events in time.
 A point process can be described completely by the (random) time of occurrence of the events.
 Common methods treat the R-R interval or heart rate series as continuous-valued signals, rather than model them to reflect the point-process structure and the stochastic nature of the underlying R-wave events.
 [Barbieri et al. 2005] modeled heartbeat intervals as a history-dependent inverse Gaussian (HDIG) point process and derive from it an explicit probability density that yields alternative definitions of heart rate and heart rate variability.
+
 The implementation of point process analysis of the original study is achieved by python library [pointprocess (v0.3, 3346078)](https://github.com/andreabonvini/pointprocess).
-The MATLAB source code of [Barbieri et al. 2005] can be found [here](http://users.neurostat.mit.edu/barbieri/pphrv).
+The MATLAB source code of [Barbieri et al., 2005] can be found [here](http://users.neurostat.mit.edu/barbieri/pphrv).
 
 We will focus on with the following time-varying HRV measures derived from HDIG reported in [Barbieri et al. 2005]:
 
@@ -205,8 +206,8 @@ This results in connectomes of the size 1054 by 1054.
 We plan to explore the following connectivity based measures.
 All measures will be computed for the two sessions respectively.
 
-1. Dynamic functional connectome [Chang et al. 2009]
-    We will expand the analysis in ([Chang et al. 2009]) from single ROI (dACC and amygdala) to the full connectome.
+1. Dynamic functional connectome [Chang et al., 2009]
+    We will expand the analysis in ([Chang et al., 2009]) from single ROI (dACC and amygdala) to the full connectome.
 
 2. ROI-HRV interaction
     We compute interaction terms of each ROI and HRV, and then correlate each interaction with the remaining ROI, resulting an asymmetrical connectome.
@@ -220,7 +221,7 @@ ICC can be interpreted as follows ([Cicchetti and Sparrow 1981]):
 - <0.4 poor
 - 0.4–0.59 fair
 - 0.60–0.74 good
-- > 0.74 excellent
+- \> 0.74 excellent
 
 For dynamic functional connectome and ROI-HRV interaction, ICC will be calculated at edge-level.
 
@@ -244,7 +245,7 @@ Due to the exploratory nature, the authors will simply accept the null-results a
 ### Exploratory Analysis
 <!-- If you plan to explore your dataset to look for unexpected differences or relationships, describe those tests here. If reported, add them to the final paper under a heading that clearly differentiates this exploratory part of your study from the confirmatory part. -->
 We will also compute a group level the cortical diffusion embedding map of dynamic functional connectome and ROI-HRV interaction respectively to exploration the impact of physiology on whole brain gradient.
-We will compare those to standard diffusion embedding map calculated with the original method in [Margulies et al. 2016].
+We will compare those to standard diffusion embedding map calculated with the original method in [Margulies et al., 2016.
 As the two set of maps might have not spatial correspondence, we will not perform reliability tests on this measure.
 Diffusion embedding map calculation is implemented by python library [BrainSpace](https://brainspace.readthedocs.io/en/latest/).
 
@@ -257,8 +258,8 @@ Due to the high volume of available assessments, we will use canonical correlati
 
 <!-- Reference -->
 [Nguyen et al., 2015]: https://doi.org/10.1016/j.neuroimage.2015.08.078
-[Glover et al. 2000]: https://doi.org/10.1002/1522-2594(200007)44:1<162::AID-MRM23>3.0.CO;2-E
-[Chang et al. 2009]: https://doi.org/10.1016/j.neuroimage.2008.09.029
+[Glover et al., 2000]: https://doi.org/10.1002/1522-2594(200007)44:1<162::AID-MRM23>3.0.CO;2-E
+[Chang et al., 2009]: https://doi.org/10.1016/j.neuroimage.2008.09.029
 [Chen et al., 2020]: https://doi.org/10.1016/j.neuroimage.2020.116707
 [Kassinopoulos et al., 2019]: https://doi.org/10.1016/j.neuroimage.2019.116150
 [Nooner et al, 2012]: https://doi.org/10.3389/fnins.2012.00152
@@ -267,5 +268,6 @@ Due to the high volume of available assessments, we will use canonical correlati
 [Noble et al., 2020]: https://academic.oup.com/cercor/article/27/11/5415/4139668#113551820
 [Cicchetti and Sparrow 1981]: https://pubmed.ncbi.nlm.nih.gov/7315877/
 [Elgendi et al., 2013]: https://doi.org/10.1371/journal.pone.0076585
-[Khodadad1 et al.2018]: https://doi.org/10.1088/1361-6579/aad7e6
-[Margulies et al. 2016]: https://doi.org/10.1073/pnas.1608282113
+[Khodadad1 et al., 2018]: https://doi.org/10.1088/1361-6579/aad7e6
+[Margulies et al., 2016]: https://doi.org/10.1073/pnas.1608282113
+[Barbieri et al., 2005]: https://doi.org/10.1152/ajpheart.00482.2003
