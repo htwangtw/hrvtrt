@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "physiogradient"
+name = "hrvtrt"
 version = "0.1.0"
-description = "Exploring physiology related FC gradient"
+description = "Exploring heart rate variability related FC gradient"
 authors = ["Hao-Ting Wang <htwangtw@gmail.com>"]
 license = "Apache2.0"
 

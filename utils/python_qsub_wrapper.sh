@@ -16,4 +16,4 @@ fi
 
 conda deactivate && conda activate nki
 
-python ${HOME}/projects/critchley_nkiphysio/physiogradient/${1}
+python ${HOME}/projects/critchley_nkiphysio/hrvtrt/${1}
