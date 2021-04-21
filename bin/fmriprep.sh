@@ -13,27 +13,27 @@ DATA_DIR=${HOME}/projects/critchley_nkiphysio/scratch/rawdata
 SCRATCH_DIR=${HOME}/projects/critchley_nkiphysio/scratch/wd
 OUT_DIR=${HOME}/projects/critchley_nkiphysio/derivatives
 
-cd ${DATA_DIR}
+cd "${DATA_DIR}"
 SUBJLIST=($(ls sub* -d))
-cd ${HOME}
+cd "${HOME}"
 
-i=$(expr $SGE_TASK_ID - 1)
+i="$(($SGE_TASK_ID - 1))"
 
 SUBJECT=${SUBJLIST[${i}]}
-echo $SUBJECT
+echo "$SUBJECT"
 
 singularity run --cleanenv \
-    -B ${DATA_DIR}:/data \
-    -B ${OUT_DIR}/:/out \
-    -B ${SCRATCH_DIR}:/wd \
-    ${HOME}/singularity-images/fmriprep-20.2.1.simg \
+    -B "${DATA_DIR}":/data \
+    -B "${OUT_DIR}"/:/out \
+    -B "${SCRATCH_DIR}":/wd \
+    "${HOME}"/singularity-images/fmriprep-20.2.1.simg \
     --skip_bids_validation \
-    --participant-label ${SUBJECT} \
+    --participant-label "${SUBJECT}" \
     --omp-nthreads 4 --nthreads 6 --mem_mb 30000 \
     --longitudinal \
     --output-spaces MNI152NLin2009cAsym:res-2 fsLR:den-32k \
     --cifti-output \
-    --fs-license-file ${HOME}/singularity-images/freesurfer_license.txt \
+    --fs-license-file "${HOME}"/singularity-images/freesurfer_license.txt \
     --work-dir /wd \
     /data /out/ participant
 

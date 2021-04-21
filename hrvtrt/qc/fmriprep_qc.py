@@ -10,7 +10,6 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash_extensions import Keyboard
-import time
 
 import flask
 import glob
@@ -21,7 +20,7 @@ import re
 def build_app(derivatives_path):
 
     static_image_route = "/images/"
-    image_directory = os.getcwd()
+    # image_directory = os.getcwd()
     preproc_steps_template = {
         "sdc": "Susceptibility distortion correction",
         "bbregister": "Alignment of functional and anatomical MRI data",

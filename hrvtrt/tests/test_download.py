@@ -1,4 +1,3 @@
-import pytest
 from pathlib import Path
 from ..download import (
     get_subjects,
@@ -22,7 +21,7 @@ def test_subject_crawler():
     s3b = "fcp-indi"
     pf = "data/Projects/RocklandSample/RawDataBIDSLatest"
     files = subject_crawler("A00055946", "TRT", s3b, pf)
-    assert type(files) == list
+    assert isinstance(files, list) == True
 
 
 def test_keep_file():

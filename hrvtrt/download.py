@@ -1,6 +1,4 @@
-"""
-NKI TRT dataset resting state date (TR=645 ms) download script
-"""
+"""NKI TRT dataset resting state date (TR=645 ms) download script"""
 from pathlib import Path
 import os
 

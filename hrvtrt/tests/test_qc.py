@@ -1,7 +1,6 @@
 from ..qc.motion import data_qc, _physio_process
 from .utils import get_test_data_path
 from pathlib import Path
-import numpy as np
 
 fmriprep_path = Path(get_test_data_path()) / "fmriprep"
 

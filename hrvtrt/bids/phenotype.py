@@ -44,7 +44,7 @@ class Phenotype:
     def __init__(self, phenotype_path, subject_info, header):
         self.phenotype_path = (
             Path(phenotype_path)
-            if type(phenotype_path) is str
+            if isinstance(phenotype_path, str)
             else phenotype_path
         )
         self.subject_info = _parseinfo(subject_info, header)

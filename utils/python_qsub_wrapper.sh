@@ -13,9 +13,9 @@
 if [[ "x$SGE_ROOT" = "x" ]] ; then
   echo "not on the cluster"
 else
-  . ${HOME}/.bash_profile
+  . "${HOME}"/.bash_profile
 fi
 
 conda deactivate && conda activate hrvtrt
 
-python ${HOME}/projects/critchley_nkiphysio/hrvtrt/${1}
+python "${HOME}"/projects/critchley_nkiphysio/hrvtrt/${1}
