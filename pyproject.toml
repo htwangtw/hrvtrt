@@ -28,7 +28,7 @@ ipython = "^7.21"
 sphinxcontrib-napoleon = "^0.7"
 
 [build-system]
-requires = ["poetry>=1.14"]
+requires = ["poetry>=1.1.4"]
 build-backend = "poetry.masonry.api"
 
 [tool.black]
