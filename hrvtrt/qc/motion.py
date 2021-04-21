@@ -44,7 +44,7 @@ def data_qc(bids_path, fmriprep_path):
     for confound_path in data_paths:
         subject, session = parse_bids_subject(confound_path.name)
         print(subject, session)
-        # cii_path = _find_cifti(confound_path)
+        cii_path = _find_cifti(confound_path)
         physio_path = _find_physio(subject, session, bids_path)
 
         # physiology data
@@ -61,8 +61,8 @@ def data_qc(bids_path, fmriprep_path):
         fd = confound_raw["framewise_displacement"].values
         fd_mean, fd_max, fd_perc = _fd(fd[1:])
 
-        # cii_data = nb.load(str(cii_path)).get_fdata()
-        # tsnr_mean = _tsnr(cii_data, 0)
+        cii_data = nb.load(str(cii_path)).get_fdata()
+        tsnr_mean = _tsnr(cii_data, 0)
         tsnr_mean = None
         qc = {
             "participant_id": subject,
