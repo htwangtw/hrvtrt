@@ -93,7 +93,7 @@ def _find_cifti(fmriprep_file):
     subject, session = parse_bids_subject(fmriprep_file.name)
     cii_path = list(
         fmriprep_file.parent.glob(
-            f"sub-{subject}_ses-{session}_*_bold.dtseries.nii"
+            f"sub-{subject}_ses-{session}_*.dtseries.nii"
         )
     )
     if cii_path and (len(cii_path) == 1):
