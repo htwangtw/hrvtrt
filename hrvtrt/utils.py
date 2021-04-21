@@ -1,7 +1,17 @@
 import warnings
 import re
+import json
 
 import pandas as pd
+
+
+def read_json(json_path):
+    """
+    Read json file
+    """
+    with open(json_path, "r") as f:
+        meta = json.load(f)
+    return meta
 
 
 def read_tsv(filename, **kargs):
@@ -38,7 +48,7 @@ def _check_tsv(df):
 
 def parse_bids_subject(filename):
     """Get subject and session information form a BIDS filename"""
-    matching = re.match("sub-([A0-9]*)_ses-([A-Z]*)", filename)
+    matching = re.match("sub-([A-Za-z0-9]*)_ses-([A-Z]*)", filename)
     if matching:
         return matching.group(1), matching.group(2)
     else:
