@@ -8,7 +8,6 @@ import pandas as pd
 
 class Phenotype:
     """
-
     Load BIDS phenotype data matching the subject list to a dataframe
 
     Parameters
@@ -102,6 +101,7 @@ class Phenotype:
 def _parseinfo(path, header):
     """
     Parse subject info
+
     path:
         path to the subject info TSV file containing subject number and session info
         one session per row

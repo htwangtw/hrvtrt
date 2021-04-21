@@ -25,6 +25,7 @@ def read_tsv(filename, **kargs):
 
     **kargs:
         other inputs pass to panda.read_csv
+
     """
     if kargs.get("sep", False):
         raise Exception("There's not need to provide input for `sep`.")

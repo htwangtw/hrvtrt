@@ -27,21 +27,7 @@ def signal_outliers(signal, samping_rate):
 
 
 def _mad(arr):
-    """
-    Median Absolute Deviation
-
-    A"Robust" version of standard deviation.
-    Indices variabililty of the sample.
-
-    Parameter
-    ----------
-    arr : numpy.array
-        1-D signal
-
-    Note
-    ----
-    https://en.wikipedia.org/wiki/Median_absolute_deviation
-    """
+    """Median Absolute Deviation."""
     med = np.median(arr)
     return med, np.median(np.abs(arr - med))
 

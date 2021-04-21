@@ -19,7 +19,7 @@ import re
 
 
 def build_app(derivatives_path):
-    """Main app"""
+    """Main app."""
     static_image_route = "/images/"
     # image_directory = os.getcwd()
     preproc_steps_template = {
