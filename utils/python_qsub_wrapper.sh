@@ -18,4 +18,4 @@ fi
 
 conda deactivate && conda activate hrvtrt
 
-python "${HOME}"/projects/critchley_nkiphysio/hrvtrt/${1}
+python "${HOME}"/projects/critchley_nkiphysio/hrvtrt/"${1}"

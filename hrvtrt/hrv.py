@@ -27,7 +27,8 @@ def signal_outliers(signal, samping_rate):
 
 
 def _mad(arr):
-    """Median Absolute Deviation
+    """
+    Median Absolute Deviation
 
     A"Robust" version of standard deviation.
 

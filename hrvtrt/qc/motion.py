@@ -1,4 +1,4 @@
-"""Motion parameters related group statistics"""
+"""Motion parameters related group statistics."""
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -12,7 +12,9 @@ from ..hrv import signal_outliers
 
 def data_qc(bids_path, fmriprep_path):
     """
-    Summarise motion and physiology related QC information.
+    QC BIDS dataset
+
+    Summarise motion and physiology related QC information.1
 
     Parameters
     ----------

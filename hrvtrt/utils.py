@@ -16,6 +16,8 @@ def read_tsv(filename, **kargs):
     """
     Read tsv file
 
+    Allow pandas.read_csv in kargs.
+
     Parameters
     ----------
     filename: str or Path

@@ -7,6 +7,7 @@ import pandas as pd
 
 
 class Phenotype:
+
     """
     Load BIDS phenotype data matching the subject list to a dataframe
 
@@ -42,6 +43,7 @@ class Phenotype:
     """
 
     def __init__(self, phenotype_path, subject_info, header):
+        """Default parameters."""
         self.phenotype_path = (
             Path(phenotype_path)
             if isinstance(phenotype_path, str)

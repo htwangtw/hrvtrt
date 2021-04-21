@@ -17,7 +17,7 @@ cd "${DATA_DIR}"
 SUBJLIST=($(ls sub* -d))
 cd "${HOME}"
 
-i="$(($SGE_TASK_ID - 1))"
+i=$((SGE_TASK_ID - 1))
 
 SUBJECT=${SUBJLIST[${i}]}
 echo "$SUBJECT"

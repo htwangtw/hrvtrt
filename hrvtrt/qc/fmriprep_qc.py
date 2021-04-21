@@ -1,5 +1,6 @@
 """
-run dash app to view fmriprep qc images
+Run dash app to view fmriprep qc images
+
 Modified from https://github.com/SIMEXP/fmriprep-qc
 
 Modified by: Hao-Ting Wang
