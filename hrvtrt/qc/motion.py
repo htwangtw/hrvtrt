@@ -98,7 +98,7 @@ def _find_cifti(fmriprep_file):
     if cii_path and len(cii_path) == 1:
         return cii_path[0]
     else:
-        raise ValueError("No associated cifti file")
+        raise ValueError(f"No associated cifti file: {cii_path}")
 
 
 def _tsnr(imgdata, t_axis):
