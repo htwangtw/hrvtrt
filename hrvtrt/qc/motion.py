@@ -43,6 +43,7 @@ def data_qc(bids_path, fmriprep_path):
     reprot = []
     for confound_path in data_paths:
         subject, session = parse_bids_subject(confound_path.name)
+        print(subject, session)
         cii_path = _find_cifti(confound_path)
         physio_path = _find_physio(subject, session, bids_path)
         cii_data = nb.load(str(cii_path)).get_fdata()
@@ -95,10 +96,10 @@ def _find_cifti(fmriprep_file):
             f"sub-{subject}_ses-{session}_*_bold.dtseries.nii"
         )
     )
-    if cii_path and len(cii_path) == 1:
+    if cii_path and (len(cii_path) == 1):
         return cii_path[0]
     else:
-        raise ValueError(f"No associated cifti file: {fmriprep_file}")
+        raise ValueError(f"No associated cifti file: {fmriprep_file.parent}")
 
 
 def _tsnr(imgdata, t_axis):
