@@ -80,7 +80,7 @@ def data_qc(bids_path, fmriprep_path):
 
 def _find_physio(subject, session, bids_path):
     physio_path = list(
-        bids_path.glob(f"**/sub-{subject}_ses-{session}_*_physio.tsv.gz")
+        bids_path.glob(f"**/sub-{subject}_ses-{session}*_physio.tsv.gz")
     )
     if physio_path and len(physio_path) == 1:
         return physio_path[0]
@@ -93,13 +93,13 @@ def _find_cifti(fmriprep_file):
     subject, session = parse_bids_subject(fmriprep_file.name)
     cii_path = list(
         fmriprep_file.parent.glob(
-            f"sub-{subject}_ses-{session}_*.dtseries.nii"
+            f"sub-{subject}_ses-{session}*_bold.dtseries.nii"
         )
     )
     if cii_path and (len(cii_path) == 1):
         return cii_path[0]
     else:
-        raise ValueError(f"No associated cifti file: {fmriprep_file.parent}")
+        raise ValueError(f"No associated cifti file: {fmriprep_file}")
 
 
 def _tsnr(imgdata, t_axis):
