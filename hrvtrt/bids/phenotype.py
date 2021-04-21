@@ -7,8 +7,8 @@ import pandas as pd
 
 
 class Phenotype:
-
     """
+
     Load BIDS phenotype data matching the subject list to a dataframe
 
     Parameters

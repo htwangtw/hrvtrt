@@ -14,7 +14,7 @@ def data_qc(bids_path, fmriprep_path):
     """
     QC BIDS dataset
 
-    Summarise motion and physiology related QC information.1
+    Summarise motion and physiology related QC information.
 
     Parameters
     ----------

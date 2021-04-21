@@ -19,7 +19,7 @@ import re
 
 
 def build_app(derivatives_path):
-
+    """Main app"""
     static_image_route = "/images/"
     # image_directory = os.getcwd()
     preproc_steps_template = {
@@ -30,7 +30,7 @@ def build_app(derivatives_path):
         "rois": "Brain mask and (temporal/anatomical) CompCor ROIs",
     }
     default_preproc_step = "carpetplot"
-    idx_fname = 0
+    # idx_fname = 0
 
     def list_sessions(subject):
         paths = sorted(
