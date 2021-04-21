@@ -4,4 +4,4 @@ bids = "/research/cisc1/projects/critchley_nkiphysio/rawdata"
 fmriprep = "/research/cisc2/projects/critchley_nkiphysio/derivatives/fmriprep"
 
 df = data_qc(bids_path=bids, fmriprep_path=fmriprep)
-df.to_csv("restuls/motion_qc.tsv", sep="\t", index=False)
+df.to_csv("results/motion_qc.tsv", sep="\t", index=False)

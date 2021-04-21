@@ -6,6 +6,8 @@
 #$ -N pythonjob
 #$ -o /home/$USER/logs
 #$ -j y
+#$ -pe openmp 8
+#$ -l m_mem_free=4G
 
 
 if [[ "x$SGE_ROOT" = "x" ]] ; then
@@ -14,6 +16,6 @@ else
   . ${HOME}/.bash_profile
 fi
 
-conda deactivate && conda activate nki
+conda deactivate && conda activate hrvtrt
 
 python ${HOME}/projects/critchley_nkiphysio/hrvtrt/${1}
