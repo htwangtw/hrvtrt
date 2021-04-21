@@ -89,9 +89,13 @@ Please find details in [Nooner et al, 2012] and on their [official website](http
 ### Measured Variables
 <!-- Describe both outcome measures as well as predictors and covariates and label them accordingly. If you are using a scale or an index, state the construct the scale/index represents, which items the scale/index will consist of, and how these items will be aggregated. When the aggregation is based on exploratory factor analysis (EFA) or confirmatory factor analysis (CFA), also specify the relevant details (EFA: rotation, how the number of factors will be determined, how best fit will be selected, CFA: how loadings will be specified, how fit will be assessed, which residuals variance terms will be correlated). If you are using any categorical variables, state how you will code them in the statistical analyses. -->
 We will consider the following variables only:
-Demographics and basic information: age; gender; session.
-Physiology: continuous pulse-oximetry recordings, collected at the same time as the resting-state fMRI; continuous respiratory volume recordings (units mm3), collected at the same time as the resting-state fMRI
-Neuroimaging: MPRAGE T1w scans collected in both sessions; 9 minutes of resting-state EPI scan TR = 645 ms
+
+- Demographics and basic information: age; gender; session.
+- Physiology:
+    1. continuous pulse-oximetry recordings, collected at the same time as the resting-state fMRI
+    2. continuous respiratory volume recordings (units mm3), collected at the same time as the resting-state fMRI
+- Neuroimaging: MPRAGE T1w scans collected in both sessions; 9 minutes of resting-state EPI scan TR = 645 ms
+
 Within this dataset, our primary measures of interest are the physiological variables and the fMRI.
 
 ### Inclusion Criteria
@@ -185,9 +189,8 @@ Common methods treat the R-R interval or heart rate series as continuous-valued 
 The implementation of point process analysis of the original study is achieved by python library [pointprocess (v0.3, 3346078)](https://github.com/andreabonvini/pointprocess).
 The MATLAB source code of [Barbieri et al., 2005] can be found [here](http://users.neurostat.mit.edu/barbieri/pphrv).
 
-We will focus on with the following time-varying HRV measures derived from HDIG reported in [Barbieri et al. 2005]:
+We will focus on with the following time-varying HRV measures derived from HDIG reported in [Napadow et al., 2013]:
 
-- Standard deviation of inter beat interval (SDNN) (msec)
 - Standard deviation of heart rate (bpm)
 - LF/HF
 
@@ -206,10 +209,10 @@ This results in connectomes of the size 1054 by 1054.
 We plan to explore the following connectivity based measures.
 All measures will be computed for the two sessions respectively.
 
-1. Dynamic functional connectome [Chang et al., 2009]
+1. Continuous HRV in a simple GLM [Napadow et al., 2013]
+2. Dynamic functional connectome [Chang et al., 2009]
     We will expand the analysis in ([Chang et al., 2009]) from single ROI (dACC and amygdala) to the full connectome.
-
-2. ROI-HRV interaction
+3. ROI-HRV interaction
     We compute interaction terms of each ROI and HRV, and then correlate each interaction with the remaining ROI, resulting an asymmetrical connectome.
 
 ### Reliability and Robustness Testing
@@ -245,7 +248,7 @@ Due to the exploratory nature, the authors will simply accept the null-results a
 ### Exploratory Analysis
 <!-- If you plan to explore your dataset to look for unexpected differences or relationships, describe those tests here. If reported, add them to the final paper under a heading that clearly differentiates this exploratory part of your study from the confirmatory part. -->
 We will also compute a group level the cortical diffusion embedding map of dynamic functional connectome and ROI-HRV interaction respectively to exploration the impact of physiology on whole brain gradient.
-We will compare those to standard diffusion embedding map calculated with the original method in [Margulies et al., 2016.
+We will compare those to standard diffusion embedding map calculated with the original method in [Margulies et al., 2016].
 As the two set of maps might have not spatial correspondence, we will not perform reliability tests on this measure.
 Diffusion embedding map calculation is implemented by python library [BrainSpace](https://brainspace.readthedocs.io/en/latest/).
 
@@ -271,3 +274,4 @@ Due to the high volume of available assessments, we will use canonical correlati
 [Khodadad1 et al., 2018]: https://doi.org/10.1088/1361-6579/aad7e6
 [Margulies et al., 2016]: https://doi.org/10.1073/pnas.1608282113
 [Barbieri et al., 2005]: https://doi.org/10.1152/ajpheart.00482.2003
+[Napadow et al., 2013]: https://doi.org/10.1016/j.neuroimage.2008.04.238

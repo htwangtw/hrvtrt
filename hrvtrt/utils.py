@@ -1,7 +1,17 @@
 import warnings
 import re
+import json
 
 import pandas as pd
+
+
+def read_json(json_path):
+    """
+    Read json file
+    """
+    with open(json_path, "r") as f:
+        meta = json.load(f)
+    return meta
 
 
 def read_tsv(filename, **kargs):
