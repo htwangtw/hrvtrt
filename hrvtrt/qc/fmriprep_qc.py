@@ -1,5 +1,6 @@
 """
-run dash app to view fmriprep qc images
+Run dash app to view fmriprep qc images
+
 Modified from https://github.com/SIMEXP/fmriprep-qc
 
 Modified by: Hao-Ting Wang
@@ -10,7 +11,6 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash_extensions import Keyboard
-import time
 
 import flask
 import glob
@@ -19,9 +19,9 @@ import re
 
 
 def build_app(derivatives_path):
-
+    """Main app."""
     static_image_route = "/images/"
-    image_directory = os.getcwd()
+    # image_directory = os.getcwd()
     preproc_steps_template = {
         "sdc": "Susceptibility distortion correction",
         "bbregister": "Alignment of functional and anatomical MRI data",
@@ -30,7 +30,7 @@ def build_app(derivatives_path):
         "rois": "Brain mask and (temporal/anatomical) CompCor ROIs",
     }
     default_preproc_step = "carpetplot"
-    idx_fname = 0
+    # idx_fname = 0
 
     def list_sessions(subject):
         paths = sorted(

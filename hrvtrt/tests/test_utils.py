@@ -10,7 +10,7 @@ test_tsv = Path(get_test_data_path()) / "participants.tsv"
 def test_invalid_input():
     """Invalid inputs."""
     with pytest.raises(Exception):
-        df = read_tsv(test_tsv, sep="\t")
+        read_tsv(test_tsv, sep="\t")
 
     with pytest.raises(ValueError):
         parse_bids_subject("file.tsv")

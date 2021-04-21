@@ -1,6 +1,4 @@
-"""
-Motion parameters related group statistics
-"""
+"""Motion parameters related group statistics."""
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -14,6 +12,8 @@ from ..hrv import signal_outliers
 
 def data_qc(bids_path, fmriprep_path):
     """
+    QC BIDS dataset
+
     Summarise motion and physiology related QC information.
 
     Parameters
@@ -30,10 +30,10 @@ def data_qc(bids_path, fmriprep_path):
         Framewise displacement derivatives (mean, maximum, percent above 0.2 mm)
         Mean t-SNR of all  grayordinates
     """
-    if type(bids_path) is str:
+    if isinstance(bids_path, str):
         bids_path = Path(bids_path)
 
-    if type(fmriprep_path) is str:
+    if isinstance(fmriprep_path, str):
         fmriprep_path = Path(fmriprep_path)
 
     data_paths = fmriprep_path.glob(
@@ -79,6 +79,7 @@ def data_qc(bids_path, fmriprep_path):
 
 
 def _find_physio(subject, session, bids_path):
+    """Get physilogy data from BIDS dataset."""
     physio_path = list(
         bids_path.glob(f"**/sub-{subject}_ses-{session}*_physio.tsv.gz")
     )
@@ -89,7 +90,7 @@ def _find_physio(subject, session, bids_path):
 
 
 def _find_cifti(fmriprep_file):
-    """get cifti file path from the relevant confound path."""
+    """Get cifti file path from the relevant confound path."""
     subject, session = parse_bids_subject(fmriprep_file.name)
     cii_path = list(
         fmriprep_file.parent.glob(
@@ -103,9 +104,7 @@ def _find_cifti(fmriprep_file):
 
 
 def _tsnr(imgdata, t_axis):
-    """
-    Calculate average of temporal signal to noise ratio.
-    """
+    """Calculate average of temporal signal to noise ratio."""
     meanimg = np.mean(imgdata, axis=t_axis)
     stddevimg = np.std(imgdata, axis=t_axis)
     tsnr = np.zeros_like(meanimg)
@@ -117,9 +116,7 @@ def _tsnr(imgdata, t_axis):
 
 
 def _fd(fd, thresh=0.2):
-    """
-    Calculate mean and maximum framewise displacement.
-    """
+    """Calculate mean and maximum framewise displacement."""
     if len(fd.shape) != 1:
         raise ValueError("Framewise displacement should has a size of 1 x N")
     fd_mean = np.mean(fd)
@@ -129,7 +126,7 @@ def _fd(fd, thresh=0.2):
 
 
 def _physio_process(data_path):
-    """basic signal cleaning and peak extraction"""
+    """Basic signal cleaning and peak extraction."""
     json_path = str(data_path).replace("tsv.gz", "json")
     meta = read_json(json_path)
     sampling_rate = meta["SamplingFrequency"]
@@ -149,6 +146,6 @@ def _physio_process(data_path):
 
 
 def _outlier_percent(signal, samping_rate):
-    """percentage of outlier in processed"""
+    """Percentage of outlier in processed."""
     outliers = signal_outliers(signal, samping_rate)
     return 100 * (sum(outliers) / len(outliers))

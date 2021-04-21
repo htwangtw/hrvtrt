@@ -1,6 +1,5 @@
 import numpy as np
-from scipy.stats import zscore
-from scipy import interpolate, signal
+from scipy import interpolate
 
 
 def clean_ibi(events, samping_rate, n=2):
@@ -28,18 +27,13 @@ def signal_outliers(signal, samping_rate):
 
 
 def _mad(arr):
-    """Median Absolute Deviation: a "Robust" version of standard deviation.
-    Indices variabililty of the sample.
-    https://en.wikipedia.org/wiki/Median_absolute_deviation
-    """
+    """Median Absolute Deviation."""
     med = np.median(arr)
     return med, np.median(np.abs(arr - med))
 
 
 def _rolling_mad(arr, window):
-    """
-    Rolling window MAD outlier detection on 1d array.
-    """
+    """Rolling window MAD outlier detection on 1d array."""
     outliers = []
     for i in range(window, len(arr)):
         cur = arr[(i - window) : i]
