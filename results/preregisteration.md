@@ -18,9 +18,9 @@ Thus the author ignored certain sections or described alternative procedures.
 
 When specifying your research questions, it is good practice to use only two new concepts per research question. For example, split up your questions into a simple format: “Does X lead to Y?” and “Is the relationship between X and Y moderated by Z?”. By splitting up the research questions here, you can more easily describe the statistical test for each research question later. -->
 There's a long-standing debate of the impact of physiology signals on fMRI data.
-In the denoising literature, various methods have been developed to remove physiology based noise ([Glover et al. 2000]).
+In the denoising literature, various methods have been developed to remove physiology based noise ([Glover et al., 2000]).
 Although BOLD signal is, theoretically, heavily confounded by physiology signals, researchers still found functional relevance of physiology signal after removing relevant confounds.
-Literature in dynamic resting state fMRI analysis has shown that heart rate variability is highly relevant to the default mode network after accounting for heart beat and respiration related noise ([Chang et al., 2009]).
+Literature in dynamic resting state fMRI analysis has shown that heart rate variability is highly relevant to the default mode network after accounting for heart beat and respiration related noise ([Chang et al., 2013]).
 Activity in bilateral insula correlated with the interaction of high-frequency continuous heart rate variability and emotion-arousing audio inputs in movie watching paradigm ([Nguyen et al., 2015]) as well as resting state ([Kassinopoulos et al., 2019]).
 A study simulating BOLD from physiology data has recovered networks similar to canonical resting state networks found through clustering functional connectivity data ([Chen et al., 2020]).
 From the converging evidence above, we designed this analysis to understand the relevance of heart rate variability in resting state functional connectome and explore the individual differences of its cognitive and psychiatric relevance.
@@ -208,8 +208,10 @@ We plan to explore the following connectivity based measures.
 All measures will be computed for the two sessions respectively.
 
 1. Continuous HRV in a simple GLM [Napadow et al., 2013]
+
 2. Dynamic functional connectome [Chang et al., 2013]
     We will expand the analysis in ([Chang et al., 2013]) from single ROI (dACC and amygdala) to the full connectome.
+
 3. ROI-HRV interaction
     We compute interaction terms of each ROI and HRV, and then correlate each interaction with the remaining ROI, resulting an asymmetrical connectome.
 
