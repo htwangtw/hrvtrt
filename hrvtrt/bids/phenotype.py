@@ -8,8 +8,9 @@ import pandas as pd
 
 class Phenotype:
     """
-    Load BIDS phenotype data matching the subject list to a dataframe
+    Load BIDS phenotype data
 
+    Matching the subject list to a dataframe.
     Parameters
     ----------
     phenotype_path : str | Path
