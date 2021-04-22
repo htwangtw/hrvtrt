@@ -186,7 +186,7 @@ This results in connectomes of the size 1054 by 1054.
 
 ### Heart rate variability
 
-We adopt an alternative approach from [Barbieri et al. 2005] that yields alternative definitions of heart rate and heart rate variability (HRV) with point-process analysis.
+We adopt an alternative approach from [Barbieri et al., 2005] that yields alternative definitions of heart rate and heart rate variability (HRV) with point-process analysis.
 Point processes can be used as models for random events in time.
 A point process can be described completely by the (random) time of occurrence of the events.
 Common methods treat the R-R interval or heart rate series as continuous-valued signals, rather than model them to reflect the point-process structure and the stochastic nature of the underlying R-wave events.
@@ -219,6 +219,7 @@ All measures will be computed for the two sessions respectively.
 <!-- Provide a series of decisions or tests about evaluating the strength, reliability, or robustness of your finding. This may include within-study replication attempts, additional covariates, cross-validation, applying weights, selectively applying constraints in an SEM context (e.g., comparing model fit statistics), overfitting adjustment techniques used, or some other simulation/sampling/bootstrapping method. -->
 As the main aim of the analysis is to understand test-retest reliability of the impact of HRV on connectome, we adopt measures described in the past literature.
 We will use intraclass correlation coefficient (ICC), see: [Noble et al., 2020].
+
 ICC can be interpreted as follows ([Cicchetti and Sparrow 1981]):
 
 - <0.4 poor
@@ -248,7 +249,7 @@ Due to the exploratory nature, the authors will simply accept the null-results a
 ### Exploratory Analysis
 <!-- If you plan to explore your dataset to look for unexpected differences or relationships, describe those tests here. If reported, add them to the final paper under a heading that clearly differentiates this exploratory part of your study from the confirmatory part. -->
 We will also compute a group level the cortical diffusion embedding map of dynamic functional connectome and ROI-HRV interaction respectively to exploration the impact of physiology on whole brain gradient.
-We will compare those to standard diffusion embedding map calculated with the original method in [Margulies et al., 2016].
+We will compare those to standard diffusion embedding map calculated with the original method in [Margulies et al., 2016].
 As the two set of maps might have not spatial correspondence, we will not perform reliability tests on this measure.
 Diffusion embedding map calculation is implemented by python library [BrainSpace](https://brainspace.readthedocs.io/en/latest/).
 
@@ -273,6 +274,6 @@ Due to the high volume of available assessments, we will use canonical correlati
 [Cicchetti and Sparrow 1981]: https://pubmed.ncbi.nlm.nih.gov/7315877/
 [Elgendi et al., 2013]: https://doi.org/10.1371/journal.pone.0076585
 [Khodadad1 et al., 2018]: https://doi.org/10.1088/1361-6579/aad7e6
-[Margulies et al., 2016]: https://doi.org/10.1073/pnas.1608282113
-[Barbieri et al., 2005]: https://doi.org/10.1152/ajpheart.00482.2003
+[Margulies et al., 2016]: https://doi.org/10.1073/pnas.1608282113
+[Barbieri et al., 2005]: https://doi.org/10.1152/ajpheart.00482.2003
 [Napadow et al., 2013]: https://doi.org/10.1016/j.neuroimage.2008.04.238
