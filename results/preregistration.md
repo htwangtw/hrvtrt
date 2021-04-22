@@ -32,7 +32,7 @@ From the converging evidence above, we designed this analysis to understand the 
 <!-- For each of the research questions listed in the previous section, provide one or more specific and testable hypothesis. Please make clear whether the hypotheses are directional (e.g., A > B) or non-directional (e.g., A ≠ B). If directional, state the direction. You may also provide a rationale for each hypothesis. -->
 This experiment is exploratory so we do not have a prediction as to the outcome of our analyses.
 To test RQ1, we will determine whether fMRI resting state functional connectivity, using the data from session 1, is significantly correlated with heart-rate variability.
-We will expand the analysis in ([Chang et al., 2009]) from single ROI (dACC and amygdala) to the full connectome.
+We will expand the analysis in ([Chang et al., 2013]) from single ROI (dACC and amygdala) to the full connectome.
 We will also explore novel connectivity-based gradients to understand the impact of heart rate variability on the whole brain.
 
 To test RQ2, we will compare any significant associations found in our tests above with the associations for the session 2 data.
