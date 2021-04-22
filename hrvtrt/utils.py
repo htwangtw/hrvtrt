@@ -13,20 +13,7 @@ def read_json(json_path):
 
 
 def read_tsv(filename, **kargs):
-    """
-    Read tsv file
-
-    Allow pandas.read_csv in kargs.
-
-    Parameters
-    ----------
-    filename: str or Path
-        Path to tsv file
-
-    **kargs:
-        other inputs pass to panda.read_csv
-
-    """
+    """Read tsv file, allow pandas.read_csv in kargs."""
     if kargs.get("sep", False):
         raise Exception("There's not need to provide input for `sep`.")
 
