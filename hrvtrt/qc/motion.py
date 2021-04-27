@@ -11,8 +11,7 @@ from ..hrv import signal_outliers
 
 
 def data_qc(bids_path, fmriprep_path):
-    """
-    QC BIDS dataset
+    """QC BIDS dataset.
 
     Summarise motion and physiology related QC information.
 
