@@ -157,7 +157,9 @@ For pulse oximetry data, we preprocess the signal with peak detection methods re
 
 #### Exclusion criteria
 
-After fMRI data preprocessing, we will exclude subjects with high motion volumes assesed by framewise displacement above 0.5 mm in over 50% (450 volumes) of the timeseries.
+After fMRI data preprocessing, we will exclude subjects with at least one session of:
+- average frame-wise displacement > 0.5 mm
+- high motion volumes assesed by framewise displacement above 0.5 mm in over 50% (450 volumes) of the timeseries
 The metrics calculated by `fMRIprep`.
 
 Physiology data would be excluded if its deemed corrupted (no algorithm detectable peaks).

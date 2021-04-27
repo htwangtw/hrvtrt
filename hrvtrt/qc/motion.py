@@ -58,7 +58,7 @@ def data_qc(bids_path, fmriprep_path):
         # populate confounds
         confound_raw = read_tsv(confound_path)
         fd = confound_raw["framewise_displacement"].values
-        fd_mean, fd_max, fd_perc = _fd(fd[1:])
+        fd_mean, fd_max, fd_perc = _fd(fd[1:], 0.5)
 
         cii_data = nb.load(str(cii_path)).get_fdata()
         tsnr_mean = _tsnr(cii_data, 0)
@@ -69,9 +69,9 @@ def data_qc(bids_path, fmriprep_path):
             "fd_mean": fd_mean,
             "fd_max": fd_max,
             "fd_perc": fd_perc,
-            "tsnr_mean": tsnr_mean,
-            "cardiac_perc": ppg_out,
-            "respiratory_perc": rsp_out,
+            "tsnr_mean": tsnr_mean,  # not useful
+            "cardiac_perc": ppg_out,  # not useful
+            "respiratory_perc": rsp_out,   # not useful
         }
         reprot.append(qc)
     return pd.DataFrame(reprot)
