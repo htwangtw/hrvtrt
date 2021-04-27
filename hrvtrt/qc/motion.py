@@ -62,7 +62,6 @@ def data_qc(bids_path, fmriprep_path):
 
         cii_data = nb.load(str(cii_path)).get_fdata()
         tsnr_mean = _tsnr(cii_data, 0)
-        tsnr_mean = None
         qc = {
             "participant_id": subject,
             "session": session,
