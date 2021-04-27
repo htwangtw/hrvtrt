@@ -18,9 +18,9 @@ Thus the author ignored certain sections or described alternative procedures.
 
 When specifying your research questions, it is good practice to use only two new concepts per research question. For example, split up your questions into a simple format: “Does X lead to Y?” and “Is the relationship between X and Y moderated by Z?”. By splitting up the research questions here, you can more easily describe the statistical test for each research question later. -->
 There's a long-standing debate of the impact of physiology signals on fMRI data.
-In the denoising literature, various methods have been developed to remove physiology based noise ([Glover et al. 2000]).
+In the denoising literature, various methods have been developed to remove physiology based noise ([Glover et al., 2000]).
 Although BOLD signal is, theoretically, heavily confounded by physiology signals, researchers still found functional relevance of physiology signal after removing relevant confounds.
-Literature in dynamic resting state fMRI analysis has shown that heart rate variability is highly relevant to the default mode network after accounting for heart beat and respiration related noise ([Chang et al., 2009]).
+Literature in dynamic resting state fMRI analysis has shown that heart rate variability is highly relevant to the default mode network after accounting for heart beat and respiration related noise ([Chang et al., 2013]).
 Activity in bilateral insula correlated with the interaction of high-frequency continuous heart rate variability and emotion-arousing audio inputs in movie watching paradigm ([Nguyen et al., 2015]) as well as resting state ([Kassinopoulos et al., 2019]).
 A study simulating BOLD from physiology data has recovered networks similar to canonical resting state networks found through clustering functional connectivity data ([Chen et al., 2020]).
 From the converging evidence above, we designed this analysis to understand the relevance of heart rate variability in resting state functional connectome and explore the individual differences of its cognitive and psychiatric relevance.
@@ -32,7 +32,7 @@ From the converging evidence above, we designed this analysis to understand the 
 <!-- For each of the research questions listed in the previous section, provide one or more specific and testable hypothesis. Please make clear whether the hypotheses are directional (e.g., A > B) or non-directional (e.g., A ≠ B). If directional, state the direction. You may also provide a rationale for each hypothesis. -->
 This experiment is exploratory so we do not have a prediction as to the outcome of our analyses.
 To test RQ1, we will determine whether fMRI resting state functional connectivity, using the data from session 1, is significantly correlated with heart-rate variability.
-We will expand the analysis in ([Chang et al., 2009]) from single ROI (dACC and amygdala) to the full connectome.
+We will expand the analysis in ([Chang et al., 2013]) from single ROI (dACC and amygdala) to the full connectome.
 We will also explore novel connectivity-based gradients to understand the impact of heart rate variability on the whole brain.
 
 To test RQ2, we will compare any significant associations found in our tests above with the associations for the session 2 data.
@@ -157,7 +157,9 @@ For pulse oximetry data, we preprocess the signal with peak detection methods re
 
 #### Exclusion criteria
 
-After fMRI data preprocessing, we will exclude subjects with high motion volumes assesed by framewise displacement above 0.5 mm in over 50% (450 volumes) of the timeseries.
+After fMRI data preprocessing, we will exclude subjects with at least one session of:
+- average frame-wise displacement > 0.5 mm
+- high motion volumes assesed by framewise displacement above 0.5 mm in over 50% (450 volumes) of the timeseries
 The metrics calculated by `fMRIprep`.
 
 Physiology data would be excluded if its deemed corrupted (no algorithm detectable peaks).
@@ -186,7 +188,7 @@ This results in connectomes of the size 1054 by 1054.
 
 ### Heart rate variability
 
-We adopt an alternative approach from [Barbieri et al. 2005] that yields alternative definitions of heart rate and heart rate variability (HRV) with point-process analysis.
+We adopt an alternative approach from [Barbieri et al., 2005] that yields alternative definitions of heart rate and heart rate variability (HRV) with point-process analysis.
 Point processes can be used as models for random events in time.
 A point process can be described completely by the (random) time of occurrence of the events.
 Common methods treat the R-R interval or heart rate series as continuous-valued signals, rather than model them to reflect the point-process structure and the stochastic nature of the underlying R-wave events.
@@ -208,8 +210,10 @@ We plan to explore the following connectivity based measures.
 All measures will be computed for the two sessions respectively.
 
 1. Continuous HRV in a simple GLM [Napadow et al., 2013]
+
 2. Dynamic functional connectome [Chang et al., 2013]
     We will expand the analysis in ([Chang et al., 2013]) from single ROI (dACC and amygdala) to the full connectome.
+
 3. ROI-HRV interaction
     We compute interaction terms of each ROI and HRV, and then correlate each interaction with the remaining ROI, resulting an asymmetrical connectome.
 
@@ -217,6 +221,7 @@ All measures will be computed for the two sessions respectively.
 <!-- Provide a series of decisions or tests about evaluating the strength, reliability, or robustness of your finding. This may include within-study replication attempts, additional covariates, cross-validation, applying weights, selectively applying constraints in an SEM context (e.g., comparing model fit statistics), overfitting adjustment techniques used, or some other simulation/sampling/bootstrapping method. -->
 As the main aim of the analysis is to understand test-retest reliability of the impact of HRV on connectome, we adopt measures described in the past literature.
 We will use intraclass correlation coefficient (ICC), see: [Noble et al., 2020].
+
 ICC can be interpreted as follows ([Cicchetti and Sparrow 1981]):
 
 - <0.4 poor
@@ -246,7 +251,7 @@ Due to the exploratory nature, the authors will simply accept the null-results a
 ### Exploratory Analysis
 <!-- If you plan to explore your dataset to look for unexpected differences or relationships, describe those tests here. If reported, add them to the final paper under a heading that clearly differentiates this exploratory part of your study from the confirmatory part. -->
 We will also compute a group level the cortical diffusion embedding map of dynamic functional connectome and ROI-HRV interaction respectively to exploration the impact of physiology on whole brain gradient.
-We will compare those to standard diffusion embedding map calculated with the original method in [Margulies et al., 2016].
+We will compare those to standard diffusion embedding map calculated with the original method in [Margulies et al., 2016].
 As the two set of maps might have not spatial correspondence, we will not perform reliability tests on this measure.
 Diffusion embedding map calculation is implemented by python library [BrainSpace](https://brainspace.readthedocs.io/en/latest/).
 
@@ -271,6 +276,6 @@ Due to the high volume of available assessments, we will use canonical correlati
 [Cicchetti and Sparrow 1981]: https://pubmed.ncbi.nlm.nih.gov/7315877/
 [Elgendi et al., 2013]: https://doi.org/10.1371/journal.pone.0076585
 [Khodadad1 et al., 2018]: https://doi.org/10.1088/1361-6579/aad7e6
-[Margulies et al., 2016]: https://doi.org/10.1073/pnas.1608282113
-[Barbieri et al., 2005]: https://doi.org/10.1152/ajpheart.00482.2003
+[Margulies et al., 2016]: https://doi.org/10.1073/pnas.1608282113
+[Barbieri et al., 2005]: https://doi.org/10.1152/ajpheart.00482.2003
 [Napadow et al., 2013]: https://doi.org/10.1016/j.neuroimage.2008.04.238
