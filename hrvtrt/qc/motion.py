@@ -113,7 +113,7 @@ def _tsnr(imgdata, t_axis):
     tsnr[stddevimg_nonzero] = (
         meanimg[stddevimg_nonzero] / stddevimg[stddevimg_nonzero]
     )
-    return np.mean(tsnr[stddevimg_nonzero])
+    return np.mean(tsnr[tsnr > 0])
 
 
 def _fd(fd, thresh=0.2):
