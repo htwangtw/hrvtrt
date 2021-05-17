@@ -17,5 +17,5 @@ else
 fi
 
 conda deactivate && conda activate hrvtrt
-
+pip install "${HOME}"/projects/critchley_nkiphysio/hrvtrt/
 python "${HOME}"/projects/critchley_nkiphysio/hrvtrt/"${1}"
