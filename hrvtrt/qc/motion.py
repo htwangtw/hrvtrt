@@ -60,7 +60,7 @@ def data_qc(bids_path, fmriprep_path):
         fd = confound_raw["framewise_displacement"].values
         rmsd = confound_raw["rmsd"].values
         fd_mean, fd_max, fd_perc = _fd(fd[1:], 0.5)
-        despike_perc = sum(rmsd > 0.25) / fd.shape[0]
+        despike_perc = sum(rmsd > 0.25) / rmsd.shape[0]
 
         cii_data = nb.load(str(cii_path)).get_fdata()
         tsnr_mean = _tsnr(cii_data, 0)
@@ -73,7 +73,7 @@ def data_qc(bids_path, fmriprep_path):
             "despike_perc": despike_perc,
             "tsnr_mean": tsnr_mean,  # not useful
             "cardiac_perc": ppg_out,  # not useful
-            "respiratory_perc": rsp_out,   # not useful
+            "respiratory_perc": rsp_out,  # not useful
         }
         reprot.append(qc)
     return pd.DataFrame(reprot)
@@ -113,7 +113,7 @@ def _tsnr(imgdata, t_axis):
     tsnr[stddevimg_nonzero] = (
         meanimg[stddevimg_nonzero] / stddevimg[stddevimg_nonzero]
     )
-    return np.mean(tsnr)
+    return np.mean(tsnr[stddevimg_nonzero])
 
 
 def _fd(fd, thresh=0.2):
