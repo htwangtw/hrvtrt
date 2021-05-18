@@ -15,4 +15,3 @@ plot_qc(
     "/research/cisc2/projects/critchley_nkiphysio/hrvtrt/results/motion_qc.tsv",
     output_base,
 )
-
