@@ -8,6 +8,32 @@ import neurokit2 as nk
 
 from ..utils import read_tsv, read_json, parse_bids_subject
 from ..hrv import signal_outliers
+import matplotlib.pyplot as plt
+
+
+def plot_qc(path_qc, output_base):
+    data = read_tsv(path_qc)
+
+    for qc in ["fd_mean", "fd_max", "fd_perc", "despike_perc", "tsnr_median"]:
+        data_to_plot = [
+            data[qc][data["session"] != "TRT"].tolist(),
+            data[qc][data["session"] == "TRT"].tolist(),
+        ]
+        plt.figure(figsize=(10, 6))
+        x_1 = np.random.normal(1, 0.04, size=int(data.shape[0] / 2))
+        x_2 = x_1 + 1
+        plt.plot(x_1, data_to_plot[0], "r.", alpha=0.2)
+        plt.plot(x_2, data_to_plot[1], "b.", alpha=0.2)
+        for x1, x2, y1, y2 in zip(x_1, x_2, data_to_plot[0], data_to_plot[1]):
+            plt.plot([x1, x2], [y1, y2], "k-", alpha=0.1)
+        box = plt.boxplot(
+            data_to_plot,
+            positions=[1, 2],
+            labels=["Baseline", "Three-week"],
+            showfliers=False,
+        )
+        plt.title(qc)
+        plt.savefig(f"{output_base}/results/qc_{qc}.png")
 
 
 def data_qc(bids_path, fmriprep_path):
@@ -63,7 +89,7 @@ def data_qc(bids_path, fmriprep_path):
         despike_perc = sum(rmsd > 0.25) / rmsd.shape[0]
 
         cii_data = nb.load(str(cii_path)).get_fdata()
-        tsnr_mean = _tsnr(cii_data, 0)
+        tsnr_median = _tsnr(cii_data, 0)
         qc = {
             "participant_id": subject,
             "session": session,
@@ -71,7 +97,7 @@ def data_qc(bids_path, fmriprep_path):
             "fd_max": fd_max,
             "fd_perc": fd_perc,
             "despike_perc": despike_perc,
-            "tsnr_mean": tsnr_mean,  # not useful
+            "tsnr_median": tsnr_median,
             "cardiac_perc": ppg_out,  # not useful
             "respiratory_perc": rsp_out,  # not useful
         }
@@ -105,7 +131,9 @@ def _find_cifti(fmriprep_file):
 
 
 def _tsnr(imgdata, t_axis):
-    """Calculate average of temporal signal to noise ratio."""
+    """Calculate median of temporal signal to noise ratio.
+    This is consistent with MRIQC
+    """
     meanimg = np.mean(imgdata, axis=t_axis)
     stddevimg = np.std(imgdata, axis=t_axis)
     tsnr = np.zeros_like(meanimg)
@@ -113,7 +141,7 @@ def _tsnr(imgdata, t_axis):
     tsnr[stddevimg_nonzero] = (
         meanimg[stddevimg_nonzero] / stddevimg[stddevimg_nonzero]
     )
-    return np.mean(tsnr[stddevimg_nonzero])
+    return np.median(tsnr[tsnr > 0])
 
 
 def _fd(fd, thresh=0.2):
