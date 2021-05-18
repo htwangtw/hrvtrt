@@ -8,7 +8,7 @@ fmriprep_path = Path(get_test_data_path()) / "fmriprep"
 def test_motion_qc():
     df = data_qc(str(fmriprep_path), str(fmriprep_path))
     assert df.shape[0] == 1
-    assert df.shape[1] == 8
+    assert df.shape[1] == 9
 
 
 def test_physio_process():
