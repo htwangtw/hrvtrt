@@ -161,4 +161,3 @@ def download(participants, local, keywords, n_file):
         for s, l in files:
             creatdir(l)
             s3.download_file(S3BUCKET, s, l)
-
