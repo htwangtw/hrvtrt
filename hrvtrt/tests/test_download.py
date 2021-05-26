@@ -2,9 +2,9 @@ from pathlib import Path
 from ..download import (
     get_subjects,
     subject_crawler,
-    keep_file,
-    filter_files,
-    creatdir,
+    filter_generate_files,
+    check_n_files,
+    download,
 )
 
 
@@ -24,38 +24,51 @@ def test_subject_crawler():
     assert isinstance(files, list) == True
 
 
-def test_keep_file():
+def test_check_n_files():
     sub = "A00055946"
-    dt = {}
     keep = [
         "foo/bar/sub-999_T1w.nii.gz",
+        "foo/bar/sub-999_T2w.nii.gz",
         "foo/bar/sub-999_task-rest_acq-645_bold.nii.gz",
         "foo/bar/sub-999_task-rest_acq-645_physio.tsv.gz",
     ]
     # add new subject
-    dt = keep_file(sub, dt, keep, nfile=6)
-    assert len(dt[sub]) == 3
+    collector = {}
+    collector = check_n_files(sub, collector, keep, n_file=8)
+    assert len(collector[sub]) == 4
     # if encounter the subject for a second time and match target
-    dt = keep_file(sub, dt, keep, nfile=6)
-    assert len(dt[sub]) == 6
-    # too many files, remove subject
-    dt = keep_file(sub, dt, keep, nfile=6)
-    assert len(dt) == 0
+    collector = check_n_files(sub, collector, keep, n_file=8)
+    assert len(collector[sub]) == 8
+
+    # too few files, remove subject
+    toofew = {}
+    toofew = check_n_files(sub, toofew, keep, n_file=8)
+    toofew = check_n_files(sub, toofew, keep[:-2], n_file=8)
+    assert len(toofew) == 0
 
 
-def test_filter_files():
+def test_filter_generate_files():
     files = [
         "foo/bar/sub-999_T1w.nii.gz",
+        "foo/bar/sub-999_T2w.nii.gz",
         "foo/bar/sub-999_task-rest_acq-645_bold.nii.gz",
         "foo/bar/sub-999_task-rest_acq-645_physio.tsv.gz",
-        "foo/bar/sub-999_task-rest_acq-1044_bold.nii.gz",
+        "foo/bar/sub-999_task-rest_acq-1044_bold.nii.gz",  # non existing file
     ]
     targetpath = "/path/to/local"
-    source_target_list = filter_files("foo/bar", files, targetpath)
-    assert len(source_target_list) == 3
+    source_target_list = filter_generate_files(
+        "foo/bar", targetpath, files, keywords=["T1w"]
+    )
+    assert len(source_target_list) == 1
     assert source_target_list[0][1] == f"{targetpath}/sub-999_T1w.nii.gz"
 
 
-def test_creatdir(tmpdir):
-    creatdir(str(tmpdir / "test/files.txt"))
-    assert Path(tmpdir / "test").is_dir() == True
+def test_download(tmpdir):
+    download(test_subs, str(tmpdir), keywords=["T1w"], n_file=4)
+    assert (
+        Path(
+            tmpdir
+            / "sub-A00018030/ses-FLU1/anat/sub-A00018030_ses-FLU1_T1w.nii.gz"
+        ).exists()
+        == True
+    )

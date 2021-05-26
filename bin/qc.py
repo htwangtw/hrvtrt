@@ -1,4 +1,4 @@
-from hrvtrt.qc.motion import data_qc, plot_qc
+from hrvtrt.motion_qc import data_qc, plot_qc
 
 bids = "/research/cisc1/projects/critchley_nkiphysio/rawdata"
 fmriprep = "/research/cisc2/projects/critchley_nkiphysio/derivatives/fmriprep"
