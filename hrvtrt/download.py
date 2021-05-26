@@ -1,6 +1,7 @@
 """NKI TRT dataset resting state date (TR=645 ms) download script."""
 from pathlib import Path
 import os
+import sys
 
 import boto3
 from botocore import UNSIGNED
@@ -9,10 +10,9 @@ import pandas as pd
 
 from .utils import read_tsv
 
+
 S3BUCKET = "fcp-indi"
 PREFIX = "data/Projects/RocklandSample/RawDataBIDSLatest"
-LOCAL = "/research/cisc1/projects/critchley_nkiphysio/rawdata"
-datapath = Path(__file__).parent / "data/participants.tsv"
 
 
 def get_subjects(datapath):
@@ -60,11 +60,11 @@ def subject_crawler(subject, session, s3bucket, prefix):
     return [d["Key"] for d in bidsfiles["Contents"]]
 
 
-def filter_files(
+def filter_generate_files(
     s3_prefix,
     target_prefix,
     files,
-    keywords=["T1w", "T2w", "task-rest_acq-645"],
+    keywords=["T1w"],
 ):
     """Filter files based on keywords, generate target path
 
@@ -98,7 +98,7 @@ def filter_files(
     return list(zip(s3_keep, local))
 
 
-def keep_file(subject, collector, keep, n_file=16):
+def check_n_files(subject, collector, keep, n_file=1):
     """
     Organise download path per subject for the two sessions.
     If the number of total file is not the same as expected, drop the subject.
@@ -141,14 +141,20 @@ def creatdir(localpath):
         print(target)
 
 
-def main():
+def download(participants, local, keywords, n_file):
+    """Actual download script"""
     s3 = boto3.client("s3", config=Config(signature_version=UNSIGNED))
-    sub_ses = get_subjects()
+    sub_ses = get_subjects(participants)
     collector = {}
     for sub, ses in sub_ses:
-        files = subject_crawler(sub, ses, S3BUCKET, PREFIX)
-        keep = filter_files(PREFIX, files, LOCAL)
-        collector = keep_file(sub, collector, keep)
+        files = subject_crawler(sub, ses, s3bucket=S3BUCKET, prefix=PREFIX)
+        fit_keywords = filter_generate_files(
+            s3_prefix=PREFIX,
+            target_prefix=local,
+            files=files,
+            keywords=keywords,
+        )
+        collector = check_n_files(sub, collector, fit_keywords, n_file)
     print("gathered all the relevant files")
     print(len(collector))
     for files in collector.values():
@@ -158,4 +164,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    participants = Path(__file__).parent / "data/participants.tsv"
+    localpath = sys.argv[1]
+    # expecting T1w, T2w, functional, physio file and meta data (8 files) for each session
+    keywords = ["T1w", "T2w", "task-rest_acq-645"]
+    download(participants, localpath, keywords, n_file=16)
