@@ -162,10 +162,3 @@ def download(participants, local, keywords, n_file):
             creatdir(l)
             s3.download_file(S3BUCKET, s, l)
 
-
-if __name__ == "__main__":
-    participants = Path(__file__).parent / "data/participants.tsv"
-    localpath = sys.argv[1]
-    # expecting T1w, T2w, functional, physio file and meta data (8 files) for each session
-    keywords = ["T1w", "T2w", "task-rest_acq-645"]
-    download(participants, localpath, keywords, n_file=16)
