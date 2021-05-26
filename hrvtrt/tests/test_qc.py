@@ -1,4 +1,4 @@
-from ..qc.motion import data_qc, _physio_process
+from ..motion_qc import data_qc, _physio_process
 from .utils import get_test_data_path
 from pathlib import Path
 

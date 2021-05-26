@@ -6,8 +6,8 @@ import nibabel as nb
 
 import neurokit2 as nk
 
-from ..utils import read_tsv, read_json, parse_bids_subject
-from ..hrv import signal_outliers
+from .utils import read_tsv, read_json, parse_bids_subject
+from .hrv import signal_outliers
 import matplotlib.pyplot as plt
 
 
