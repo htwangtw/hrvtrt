@@ -26,34 +26,43 @@ def test_subject_crawler():
 
 def test_keep_file():
     sub = "A00055946"
-    dt = {}
     keep = [
         "foo/bar/sub-999_T1w.nii.gz",
+        "foo/bar/sub-999_T2w.nii.gz",
         "foo/bar/sub-999_task-rest_acq-645_bold.nii.gz",
         "foo/bar/sub-999_task-rest_acq-645_physio.tsv.gz",
     ]
     # add new subject
-    dt = keep_file(sub, dt, keep, nfile=6)
-    assert len(dt[sub]) == 3
+    collector = {}
+    collector = keep_file(sub, collector, keep, n_file=8)
+    assert len(collector[sub]) == 4
     # if encounter the subject for a second time and match target
-    dt = keep_file(sub, dt, keep, nfile=6)
-    assert len(dt[sub]) == 6
-    # too many files, remove subject
-    dt = keep_file(sub, dt, keep, nfile=6)
-    assert len(dt) == 0
+    collector = keep_file(sub, collector, keep, n_file=8)
+    assert len(collector[sub]) == 8
+
+    # too few files, remove subject
+    toofew = {}
+    toofew = keep_file(sub, toofew, keep, n_file=8)
+    toofew = keep_file(sub, toofew, keep[:-2], n_file=8)
+    assert len(toofew) == 0
 
 
 def test_filter_files():
     files = [
         "foo/bar/sub-999_T1w.nii.gz",
+        "foo/bar/sub-999_T2w.nii.gz",
         "foo/bar/sub-999_task-rest_acq-645_bold.nii.gz",
         "foo/bar/sub-999_task-rest_acq-645_physio.tsv.gz",
-        "foo/bar/sub-999_task-rest_acq-1044_bold.nii.gz",
+        "foo/bar/sub-999_task-rest_acq-1044_bold.nii.gz",  # non existing file
     ]
     targetpath = "/path/to/local"
-    source_target_list = filter_files("foo/bar", files, targetpath)
-    assert len(source_target_list) == 3
-    assert source_target_list[0][1] == f"{targetpath}/sub-999_T1w.nii.gz"
+    source_target_list = filter_files("foo/bar", targetpath, files)
+    assert len(source_target_list) == 4
+    for i in range(4):
+        assert (
+            source_target_list[i][1]
+            == f"{targetpath}/{files[i].split('/')[-1]}"
+        )
 
 
 def test_creatdir(tmpdir):
